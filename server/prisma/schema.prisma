@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Board {
+  id          String   @id @default(cuid())
+  name        String
+  depth       Int
+  merkleRoot  String
+  createdAt   DateTime @default(now())
+  members     Member[]
+  posts       Post[]
+  nullifiers  Nullifier[]
+}
+
+model Member {
+  id                 String   @id @default(cuid())
+  boardId            String
+  identityCommitment String
+  createdAt          DateTime @default(now())
+
+  board Board @relation(fields: [boardId], references: [id])
+
+  @@unique([boardId, identityCommitment])
+}
+
+model Post {
+  id               String   @id @default(cuid())
+  boardId          String
+  content          String
+  signalHash       String
+  merkleRootSnapshot String
+  nullifierHash    String
+  externalNullifier String
+  createdAt        DateTime @default(now())
+
+  board Board @relation(fields: [boardId], references: [id])
+
+  @@unique([boardId, externalNullifier, nullifierHash])
+}
+
+model Nullifier {
+  id               String   @id @default(cuid())
+  boardId          String
+  externalNullifier String
+  nullifierHash    String
+  createdAt        DateTime @default(now())
+
+  board Board @relation(fields: [boardId], references: [id])
+
+  @@unique([boardId, externalNullifier, nullifierHash])
+}

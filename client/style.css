@@ -1,0 +1,8 @@
+body {
+  font-family: sans-serif;
+  margin: 2rem;
+}
+#boards-list li {
+  cursor: pointer;
+  margin: 0.5rem 0;
+}
