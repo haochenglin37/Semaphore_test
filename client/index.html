@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semaphore Anon Board</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="app">
+    <h1>Semaphore Anon Board</h1>
+    <section id="identity-section">
+      <button id="gen-identity">Generate Identity</button>
+      <p id="identity-commitment"></p>
+    </section>
+    <section id="boards-section">
+      <h2>Boards</h2>
+      <ul id="boards-list"></ul>
+      <input id="new-board-name" placeholder="Board name" />
+      <button id="create-board">Create Board</button>
+    </section>
+    <section id="posts-section" style="display:none;">
+      <h2 id="current-board"></h2>
+      <textarea id="post-content" placeholder="Write something..."></textarea>
+      <button id="send-post">Post</button>
+      <ul id="posts-list"></ul>
+    </section>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
